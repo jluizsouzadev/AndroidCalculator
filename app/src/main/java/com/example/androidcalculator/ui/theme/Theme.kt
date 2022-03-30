@@ -7,16 +7,28 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+//    primary = Purple200,
+//    primaryVariant = Purple700,
+//    secondary = Teal200
+    primary = White200,
+    primaryVariant = White500,
+    secondary = Teal200,
+    secondaryVariant = Teal200
 )
 
 private val LightColorPalette = lightColors(
     primary = Purple500,
     primaryVariant = Purple700,
-    secondary = Teal200
-
+    secondary = Gray700,
+    secondaryVariant = Black700,
+    background = White200,
+    surface = White200,
+    error = Red200,
+    onPrimary = White200,
+    onSecondary = White200,
+    onBackground = Gray200,
+    onSurface = Gray200,
+    onError = White200,
     /* Other default colors to override
     background = Color.White,
     surface = Color.White,
@@ -37,7 +49,6 @@ fun AndroidCalculatorTheme(
     } else {
         LightColorPalette
     }
-
     MaterialTheme(
         colors = colors,
         typography = Typography,

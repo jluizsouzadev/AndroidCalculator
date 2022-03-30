@@ -1,18 +1,21 @@
-package com.example.androidcalculator.ui.theme
+package com.example.androidcalculator.ui.component
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.androidcalculator.R
 
 @Composable
 fun CustomButton(
@@ -43,15 +46,10 @@ fun CustomButton(
 
 @Composable
 fun DeleteButton() {
-    TextButton(
-        onClick = { /*TODO*/ },
-        enabled = false
-    ) {
-        Icon(
-            imageVector = Icons.Filled.ArrowBack,
-            contentDescription = null,
-            tint = Color.DarkGray
-        )
-    }
+    Icon(
+        painter = painterResource(id = R.drawable.ic_backspace_black_24dp),
+        contentDescription = null,
+        tint = Color.Green
+    )
 }
 
