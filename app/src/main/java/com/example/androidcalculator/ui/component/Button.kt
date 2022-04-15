@@ -3,10 +3,7 @@ package com.example.androidcalculator.ui.component
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -46,10 +43,12 @@ fun CustomButton(
 
 @Composable
 fun DeleteButton() {
-    Icon(
-        painter = painterResource(id = R.drawable.ic_backspace_black_24dp),
-        contentDescription = null,
-        tint = Color.Green
-    )
+    IconButton(onClick = { /*TODO*/ }) {
+        Icon(
+            painter = painterResource(id = R.drawable.ic_backspace_black_24dp),
+            contentDescription = null,
+            tint = Color.Green
+        )
+    }
 }
 
