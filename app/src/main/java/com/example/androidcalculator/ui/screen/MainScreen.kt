@@ -13,25 +13,43 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalTextInputService
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.androidcalculator.ui.DisplayViewModel
+import com.example.androidcalculator.ui.component.BackspaceButton
 import com.example.androidcalculator.ui.component.CustomButton
-import com.example.androidcalculator.ui.component.DeleteButton
 import com.example.androidcalculator.ui.theme.AndroidCalculatorTheme
 import com.google.accompanist.systemuicontroller.SystemUiController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    topDisplay: String,
+    backspaceButtonEnabled: Boolean,
+    displayViewModel: DisplayViewModel
+) {
     val currentOrientation = LocalConfiguration.current.orientation
-    if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) Portrait()
-    else Landscape()
+    if (currentOrientation == Configuration.ORIENTATION_PORTRAIT)
+        Portrait(
+            topDisplay = topDisplay,
+            backspaceButtonEnabled = backspaceButtonEnabled,
+            displayViewModel = displayViewModel
+        )
+    else
+        Landscape(
+            topDisplay = topDisplay,
+            backspaceButtonEnabled = backspaceButtonEnabled,
+            displayViewModel = displayViewModel
+        )
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
-fun Portrait() {
+fun Portrait(
+    topDisplay: String,
+    backspaceButtonEnabled: Boolean,
+    displayViewModel: DisplayViewModel
+) {
     val rowModifier = Modifier
         .padding(0.dp, 0.dp, 0.dp, 6.dp)
         .fillMaxWidth()
@@ -45,7 +63,7 @@ fun Portrait() {
         ) {
             CompositionLocalProvider(LocalTextInputService provides null) {
                 BasicTextField(
-                    value = "3000",
+                    value = topDisplay,
                     onValueChange = {
 
                     },
@@ -70,7 +88,10 @@ fun Portrait() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-                DeleteButton()
+                BackspaceButton(
+                    enabled = backspaceButtonEnabled,
+                    onClick = { displayViewModel.pressBackspace() }
+                )
             }
             CustomDivider()
             Row(
@@ -79,76 +100,124 @@ fun Portrait() {
             ) {
                 CustomButton(
                     text = "C",
-                    textColor = Color.Red
+                    textColor = Color.Red,
+                    onClick = {}
                 )
                 CustomButton(
                     text = "( )",
-                    textColor = Color.Green
+                    textColor = Color.Green,
+                    onClick = { }
                 )
                 CustomButton(
                     text = "%",
-                    textColor = Color.Green
+                    textColor = Color.Green,
+                    onClick = {}
                 )
                 CustomButton(
                     text = "÷",
-                    textColor = Color.Green
+                    textColor = Color.Green,
+                    onClick = {}
                 )
             }
             Row(
                 modifier = rowModifier,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                CustomButton("7")
-                CustomButton("8")
-                CustomButton("9")
+                CustomButton(
+                    text = "7",
+                    onClick = { displayViewModel.pressNumber(7) }
+                )
+                CustomButton(
+                    text = "8",
+                    onClick = { displayViewModel.pressNumber(8) }
+                )
+                CustomButton(
+                    text = "9",
+                    onClick = { displayViewModel.pressNumber(9) }
+                )
                 CustomButton(
                     text = "x",
-                    textColor = Color.Green
+                    textColor = Color.Green,
+                    onClick = {}
                 )
             }
             Row(
                 modifier = rowModifier,
                 horizontalArrangement = rowHorizontalArrangement
             ) {
-                CustomButton("4")
-                CustomButton("5")
-                CustomButton("6")
+                CustomButton(
+                    text = "4",
+                    onClick = { displayViewModel.pressNumber(4) }
+                )
+                CustomButton(
+                    text = "5",
+                    onClick = { displayViewModel.pressNumber(5) }
+                )
+                CustomButton(
+                    text = "6",
+                    onClick = { displayViewModel.pressNumber(6) }
+                )
                 CustomButton(
                     text = "-",
-                    textColor = Color.Green
+                    textColor = Color.Green,
+                    onClick = {}
                 )
             }
             Row(
                 modifier = rowModifier,
                 horizontalArrangement = rowHorizontalArrangement
             ) {
-                CustomButton("1")
-                CustomButton("2")
-                CustomButton("3")
+                CustomButton(
+                    text = "1",
+                    onClick = { displayViewModel.pressNumber(1) }
+                )
+                CustomButton(
+                    text = "2",
+                    onClick = { displayViewModel.pressNumber(2) }
+                )
+                CustomButton(
+                    text = "3",
+                    onClick = { displayViewModel.pressNumber(3) }
+                )
                 CustomButton(
                     text = "+",
-                    textColor = Color.Green
+                    textColor = Color.Green,
+                    onClick = {}
                 )
             }
             Row(
                 modifier = rowModifier,
                 horizontalArrangement = rowHorizontalArrangement
             ) {
-                CustomButton("+/-")
-                CustomButton("0")
-                CustomButton(".")
+                CustomButton(
+                    text = "+/-",
+                    onClick = {}
+                )
+                CustomButton(
+                    text = "0",
+                    onClick = { displayViewModel.pressNumber(0) }
+                )
+                CustomButton(
+                    text = ".",
+                    onClick = {}
+                )
                 CustomButton(
                     text = "=",
-                    textColor = Color.Green
+                    textColor = Color.Green,
+                    onClick = {}
                 )
             }
         }
     }
 }
 
-@Preview(widthDp = 851, heightDp = 393, showBackground = true)
+//@Preview(widthDp = 851, heightDp = 393, showBackground = true)
 @Composable
-fun Landscape() {
+fun Landscape(
+    topDisplay: String,
+    backspaceButtonEnabled: Boolean,
+    displayViewModel: DisplayViewModel
+) {
     val textFontSize = 10.sp
     val buttonHeight = 30.dp
     val buttonWidth = 70.dp
@@ -165,7 +234,7 @@ fun Landscape() {
         ) {
             CompositionLocalProvider(LocalTextInputService provides null) {
                 BasicTextField(
-                    value = "3000",
+                    value = topDisplay,
                     onValueChange = {
 
                     },
@@ -185,7 +254,10 @@ fun Landscape() {
                     singleLine = false
                 )
             }
-            DeleteButton()
+            BackspaceButton(
+                enabled = backspaceButtonEnabled,
+                onClick = { displayViewModel.pressBackspace() }
+            )
             CustomDivider()
             Row {
                 Column(modifier = columnModifier) {
@@ -194,7 +266,8 @@ fun Landscape() {
                         textColor = Color.Red,
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = {}
                     )
                 }
                 Column(modifier = columnModifier) {
@@ -203,7 +276,8 @@ fun Landscape() {
                         textColor = Color.Green,
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = {}
                     )
                 }
                 Column(modifier = columnModifier) {
@@ -212,7 +286,8 @@ fun Landscape() {
                         textColor = Color.Green,
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = {}
                     )
                 }
                 Column {
@@ -221,7 +296,8 @@ fun Landscape() {
                         textColor = Color.Green,
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = {}
                     )
                 }
             }
@@ -231,7 +307,8 @@ fun Landscape() {
                         text = "7",
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = { displayViewModel.pressNumber(7) }
                     )
                 }
                 Column(modifier = columnModifier) {
@@ -239,7 +316,8 @@ fun Landscape() {
                         text = "8",
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = { displayViewModel.pressNumber(8) }
                     )
                 }
                 Column(modifier = columnModifier) {
@@ -247,7 +325,8 @@ fun Landscape() {
                         text = "9",
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = { displayViewModel.pressNumber(9) }
                     )
                 }
                 Column {
@@ -256,7 +335,8 @@ fun Landscape() {
                         textColor = Color.Green,
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = {}
                     )
                 }
             }
@@ -266,7 +346,8 @@ fun Landscape() {
                         text = "4",
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = { displayViewModel.pressNumber(4) }
                     )
                 }
                 Column(modifier = columnModifier) {
@@ -274,7 +355,8 @@ fun Landscape() {
                         text = "5",
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = { displayViewModel.pressNumber(5) }
                     )
                 }
                 Column(modifier = columnModifier) {
@@ -282,7 +364,8 @@ fun Landscape() {
                         text = "6",
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = { displayViewModel.pressNumber(6) }
                     )
                 }
                 Column {
@@ -291,7 +374,8 @@ fun Landscape() {
                         textColor = Color.Green,
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = {}
                     )
                 }
             }
@@ -301,7 +385,8 @@ fun Landscape() {
                         text = "1",
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = { displayViewModel.pressNumber(1) }
                     )
                 }
                 Column(modifier = columnModifier) {
@@ -309,7 +394,8 @@ fun Landscape() {
                         text = "2",
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = { displayViewModel.pressNumber(2) }
                     )
                 }
                 Column(modifier = columnModifier) {
@@ -317,7 +403,8 @@ fun Landscape() {
                         text = "3",
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = { displayViewModel.pressNumber(3) }
                     )
                 }
                 Column {
@@ -326,7 +413,8 @@ fun Landscape() {
                         textColor = Color.Green,
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = {}
                     )
                 }
             }
@@ -336,7 +424,8 @@ fun Landscape() {
                         text = "+/-",
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = {}
                     )
                 }
                 Column(modifier = columnModifier) {
@@ -344,7 +433,8 @@ fun Landscape() {
                         text = "0",
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = { displayViewModel.pressNumber(0) }
                     )
                 }
                 Column(modifier = columnModifier) {
@@ -352,7 +442,8 @@ fun Landscape() {
                         text = ".",
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = {}
                     )
                 }
                 Column {
@@ -361,7 +452,8 @@ fun Landscape() {
                         textColor = Color.Green,
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
-                        buttonWidth = buttonWidth
+                        buttonWidth = buttonWidth,
+                        onClick = {}
                     )
                 }
             }

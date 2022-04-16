@@ -22,10 +22,11 @@ fun CustomButton(
     textFontSize: TextUnit = 20.sp,
     enabledButton: Boolean = true,
     buttonHeight: Dp = 70.dp,
-    buttonWidth: Dp = 70.dp
+    buttonWidth: Dp = 70.dp,
+    onClick: () -> Unit
 ) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = { onClick() },
         modifier = Modifier
             .height(buttonHeight)
             .width(buttonWidth),
@@ -42,8 +43,14 @@ fun CustomButton(
 }
 
 @Composable
-fun DeleteButton() {
-    IconButton(onClick = { /*TODO*/ }) {
+fun BackspaceButton(
+    enabled: Boolean,
+    onClick: () -> Unit
+) {
+    IconButton(
+        enabled = enabled,
+        onClick = onClick
+    ) {
         Icon(
             painter = painterResource(id = R.drawable.ic_backspace_black_24dp),
             contentDescription = null,
