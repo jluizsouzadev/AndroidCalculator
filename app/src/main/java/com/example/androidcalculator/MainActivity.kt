@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.androidcalculator.ui.DisplayViewModel
 import com.example.androidcalculator.ui.screen.MainScreen
 
 class MainActivity : ComponentActivity() {

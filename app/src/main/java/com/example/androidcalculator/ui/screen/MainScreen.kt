@@ -15,7 +15,7 @@ import androidx.compose.ui.platform.LocalTextInputService
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.androidcalculator.ui.DisplayViewModel
+import com.example.androidcalculator.DisplayViewModel
 import com.example.androidcalculator.ui.component.BackspaceButton
 import com.example.androidcalculator.ui.component.CustomButton
 import com.example.androidcalculator.ui.theme.AndroidCalculatorTheme
@@ -182,7 +182,7 @@ fun Portrait(
                 CustomButton(
                     text = "+",
                     textColor = Color.Green,
-                    onClick = {}
+                    onClick = { displayViewModel.pressSum() }
                 )
             }
             Row(
@@ -414,7 +414,7 @@ fun Landscape(
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
                         buttonWidth = buttonWidth,
-                        onClick = {}
+                        onClick = { displayViewModel.pressSum() }
                     )
                 }
             }
