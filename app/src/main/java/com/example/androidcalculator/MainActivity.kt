@@ -14,11 +14,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             val displayViewModel: DisplayViewModel = viewModel()
             val topDisplay: String by displayViewModel.topDisplay.observeAsState("")
+            val bottomDisplay: String by displayViewModel.bottomDisplay.observeAsState("")
             val backspaceButtonEnabled: Boolean by displayViewModel.backspaceEnabled.observeAsState(
                 false
             )
             MainScreen(
                 topDisplay = topDisplay,
+                bottomDisplay = bottomDisplay,
                 backspaceButtonEnabled = backspaceButtonEnabled,
                 displayViewModel = displayViewModel
             )

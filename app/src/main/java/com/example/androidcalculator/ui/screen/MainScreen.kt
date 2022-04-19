@@ -25,6 +25,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @Composable
 fun MainScreen(
     topDisplay: String,
+    bottomDisplay: String,
     backspaceButtonEnabled: Boolean,
     displayViewModel: DisplayViewModel
 ) {
@@ -32,12 +33,14 @@ fun MainScreen(
     if (currentOrientation == Configuration.ORIENTATION_PORTRAIT)
         Portrait(
             topDisplay = topDisplay,
+            bottomDisplay = bottomDisplay,
             backspaceButtonEnabled = backspaceButtonEnabled,
             displayViewModel = displayViewModel
         )
     else
         Landscape(
             topDisplay = topDisplay,
+            bottomDisplay = bottomDisplay,
             backspaceButtonEnabled = backspaceButtonEnabled,
             displayViewModel = displayViewModel
         )
@@ -47,6 +50,7 @@ fun MainScreen(
 @Composable
 fun Portrait(
     topDisplay: String,
+    bottomDisplay: String,
     backspaceButtonEnabled: Boolean,
     displayViewModel: DisplayViewModel
 ) {
@@ -74,7 +78,7 @@ fun Portrait(
                     singleLine = false
                 )
                 BasicTextField(
-                    value = "4000",
+                    value = bottomDisplay,
                     onValueChange = {
 
                     },
@@ -101,7 +105,7 @@ fun Portrait(
                 CustomButton(
                     text = "C",
                     textColor = Color.Red,
-                    onClick = {}
+                    onClick = { displayViewModel.pressClear() }
                 )
                 CustomButton(
                     text = "( )",
@@ -215,6 +219,7 @@ fun Portrait(
 @Composable
 fun Landscape(
     topDisplay: String,
+    bottomDisplay: String,
     backspaceButtonEnabled: Boolean,
     displayViewModel: DisplayViewModel
 ) {
@@ -244,7 +249,7 @@ fun Landscape(
                     singleLine = false
                 )
                 BasicTextField(
-                    value = "4000",
+                    value = bottomDisplay,
                     onValueChange = {
 
                     },
@@ -267,7 +272,7 @@ fun Landscape(
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
                         buttonWidth = buttonWidth,
-                        onClick = {}
+                        onClick = { displayViewModel.pressClear() }
                     )
                 }
                 Column(modifier = columnModifier) {

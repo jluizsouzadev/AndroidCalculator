@@ -1,3 +1,11 @@
 package com.example.androidcalculator
 
-data class Operator(var type: String)
+class Operator {
+    val addition = "+"
+    val subtraction = "-"
+    val multiplication = "x"
+    val division = "÷"
+    val percent = "%"
+    val equal = "="
+}
+
