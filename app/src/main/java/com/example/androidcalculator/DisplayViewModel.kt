@@ -30,13 +30,19 @@ class DisplayViewModel : ViewModel() {
         val counter = tempTopDisplay.count()
         if (counter == 1) {
             val firstDisplayItem: DisplayItem = tempTopDisplay.first()
-            val text = firstDisplayItem.text
-            _topDisplay.value = text
+            val digits = firstDisplayItem.text
+            _topDisplay.value = digits
             _bottomDisplay.value = ""
             return
         }
         if (counter == 2) {
-
+            val second = 1
+            val firstDisplayItem: DisplayItem = tempTopDisplay.first()
+            val secondDisplayItem: DisplayItem = tempTopDisplay[second]
+            val digits = firstDisplayItem.text + secondDisplayItem.text
+            _topDisplay.value = digits
+            _bottomDisplay.value = ""
+            return
         }
     }
 
@@ -126,10 +132,9 @@ class DisplayViewModel : ViewModel() {
         if (type == DisplayItemType.Operand) {
             var digits = lastDisplayItem.text
             digits += number.toString()
-            lastDisplayItem.text = digits
             val lastIndex = tempTopDisplay.lastIndex
-            tempTopDisplay[lastIndex] = lastDisplayItem
-            _topDisplay.value = lastDisplayItem.text
+            tempTopDisplay[lastIndex].text = digits
+            _topDisplay.value = tempTopDisplay[lastIndex].text
             updateDisplays()
             return
         } else {
@@ -144,22 +149,21 @@ class DisplayViewModel : ViewModel() {
     }
 
     fun pressBackspace() {
-//        var text = ""
-//        tempTopDisplay.removeLastOrNull()
-//        val counter = tempTopDisplay.count()
-//        if (counter == 0) {
-//            _topDisplay.value = text
-//            return
-//        }
-//        if (counter > 1) {
-//            for (character in tempTopDisplay) {
-//                text += character
-//            }
-//            _topDisplay.value = text
-//        } else {
-//            text = tempTopDisplay.first()
-//            _topDisplay.value = text
-//        }
+        val empty = tempTopDisplay.isEmpty()
+        if (empty) return
+        val lastDisplayItem: DisplayItem = tempTopDisplay.last()
+        val type = lastDisplayItem.displayItemType
+        if (type == DisplayItemType.Operator) {
+            tempTopDisplay.removeLast()
+            updateDisplays()
+            return
+        } else {
+            var digits = lastDisplayItem.text
+            digits = digits.dropLast(1)
+            val lastIndex = tempTopDisplay.lastIndex
+            tempTopDisplay[lastIndex].text = digits
+            updateDisplays()
+        }
     }
 
     fun pressSum() {
