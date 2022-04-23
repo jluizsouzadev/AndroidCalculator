@@ -110,17 +110,17 @@ fun Portrait(
                 CustomButton(
                     text = "( )",
                     textColor = Color.Green,
-                    onClick = { }
+                    onClick = { displayViewModel.pressBracket() }
                 )
                 CustomButton(
                     text = "%",
                     textColor = Color.Green,
-                    onClick = {}
+                    onClick = { displayViewModel.pressPercent()}
                 )
                 CustomButton(
                     text = "÷",
                     textColor = Color.Green,
-                    onClick = {}
+                    onClick = { displayViewModel.pressSplit() }
                 )
             }
             Row(
@@ -142,7 +142,7 @@ fun Portrait(
                 CustomButton(
                     text = "x",
                     textColor = Color.Green,
-                    onClick = {}
+                    onClick = { displayViewModel.pressMultiple() }
                 )
             }
             Row(
@@ -164,7 +164,7 @@ fun Portrait(
                 CustomButton(
                     text = "-",
                     textColor = Color.Green,
-                    onClick = {}
+                    onClick = { displayViewModel.pressMinus() }
                 )
             }
             Row(
@@ -195,7 +195,7 @@ fun Portrait(
             ) {
                 CustomButton(
                     text = "+/-",
-                    onClick = {}
+                    onClick = { displayViewModel.pressPositiveAndNegative() }
                 )
                 CustomButton(
                     text = "0",
@@ -203,12 +203,12 @@ fun Portrait(
                 )
                 CustomButton(
                     text = ".",
-                    onClick = {}
+                    onClick = { displayViewModel.pressDot() }
                 )
                 CustomButton(
                     text = "=",
                     textColor = Color.Green,
-                    onClick = {}
+                    onClick = { displayViewModel.pressEqual() }
                 )
             }
         }
@@ -282,7 +282,7 @@ fun Landscape(
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
                         buttonWidth = buttonWidth,
-                        onClick = {}
+                        onClick = { displayViewModel.pressBracket() }
                     )
                 }
                 Column(modifier = columnModifier) {
@@ -292,7 +292,7 @@ fun Landscape(
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
                         buttonWidth = buttonWidth,
-                        onClick = {}
+                        onClick = { displayViewModel.pressBracket() }
                     )
                 }
                 Column {
@@ -302,7 +302,7 @@ fun Landscape(
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
                         buttonWidth = buttonWidth,
-                        onClick = {}
+                        onClick = { displayViewModel.pressSplit() }
                     )
                 }
             }
@@ -341,7 +341,7 @@ fun Landscape(
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
                         buttonWidth = buttonWidth,
-                        onClick = {}
+                        onClick = { displayViewModel.pressMultiple() }
                     )
                 }
             }
@@ -380,7 +380,7 @@ fun Landscape(
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
                         buttonWidth = buttonWidth,
-                        onClick = {}
+                        onClick = { displayViewModel.pressMinus() }
                     )
                 }
             }
@@ -430,7 +430,7 @@ fun Landscape(
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
                         buttonWidth = buttonWidth,
-                        onClick = {}
+                        onClick = { displayViewModel.pressPositiveAndNegative() }
                     )
                 }
                 Column(modifier = columnModifier) {
@@ -448,7 +448,7 @@ fun Landscape(
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
                         buttonWidth = buttonWidth,
-                        onClick = {}
+                        onClick = { displayViewModel.pressDot() }
                     )
                 }
                 Column {
@@ -458,7 +458,7 @@ fun Landscape(
                         textFontSize = textFontSize,
                         buttonHeight = buttonHeight,
                         buttonWidth = buttonWidth,
-                        onClick = {}
+                        onClick = { displayViewModel.pressEqual() }
                     )
                 }
             }
