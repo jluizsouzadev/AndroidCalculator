@@ -216,4 +216,8 @@ class DisplayViewModel : ViewModel() {
         _topDisplay.value = empty
         _bottomDisplay.value = empty
     }
+
+    fun pressPositiveAndNegative() {
+        TODO("Not yet implemented")
+    }
 }

@@ -7,8 +7,12 @@ import androidx.compose.material.Divider
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalTextInputService
@@ -58,6 +62,7 @@ fun Portrait(
         .padding(0.dp, 0.dp, 0.dp, 6.dp)
         .fillMaxWidth()
     val rowHorizontalArrangement = Arrangement.SpaceBetween
+    val focusRequester = FocusRequester()
     AndroidCalculatorTheme {
         Column(
             modifier = Modifier
@@ -72,11 +77,16 @@ fun Portrait(
 
                     },
                     modifier = Modifier
+                        .focusRequester(focusRequester)
                         .height(150.dp)
                         .fillMaxWidth(),
                     textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.End),
                     singleLine = false
                 )
+                DisposableEffect(Unit) {
+                    focusRequester.requestFocus()
+                    onDispose {  }
+                }
                 BasicTextField(
                     value = bottomDisplay,
                     onValueChange = {
@@ -115,7 +125,7 @@ fun Portrait(
                 CustomButton(
                     text = "%",
                     textColor = Color.Green,
-                    onClick = { displayViewModel.pressPercent()}
+                    onClick = { displayViewModel.pressPercent() }
                 )
                 CustomButton(
                     text = "÷",
@@ -229,6 +239,7 @@ fun Landscape(
     val columnModifier = Modifier.padding(0.dp, 0.dp, 6.dp, 0.dp)
     val systemUiController: SystemUiController = rememberSystemUiController()
     systemUiController.isStatusBarVisible = false
+    val focusRequester = FocusRequester()
     AndroidCalculatorTheme {
         Column(
             modifier = Modifier
@@ -244,10 +255,15 @@ fun Landscape(
 
                     },
                     modifier = Modifier
+                        .focusRequester(focusRequester)
                         .fillMaxWidth(),
                     textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.End),
                     singleLine = false
                 )
+                DisposableEffect(Unit) {
+                    focusRequester.requestFocus()
+                    onDispose {  }
+                }
                 BasicTextField(
                     value = bottomDisplay,
                     onValueChange = {
