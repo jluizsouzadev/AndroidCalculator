@@ -43,6 +43,7 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    namespace 'com.example.androidcalculator'
 }
 
 dependencies {
@@ -54,7 +55,7 @@ dependencies {
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     implementation 'androidx.activity:activity-compose:1.4.0'
-    implementation 'com.google.accompanist:accompanist-systemuicontroller:0.24.6-alpha'
+    implementation 'com.google.accompanist:accompanist-systemuicontroller:0.24.9-beta'
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"

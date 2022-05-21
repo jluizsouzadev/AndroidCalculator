@@ -8,7 +8,6 @@ import androidx.compose.material.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -16,11 +15,14 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalTextInputService
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.androidcalculator.AlertDialogParameters
 import com.example.androidcalculator.DisplayViewModel
 import com.example.androidcalculator.ui.component.BackspaceButton
+import com.example.androidcalculator.ui.component.CustomAlertDialog
 import com.example.androidcalculator.ui.component.CustomButton
 import com.example.androidcalculator.ui.theme.AndroidCalculatorTheme
 import com.google.accompanist.systemuicontroller.SystemUiController
@@ -28,9 +30,10 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun MainScreen(
-    topDisplay: String,
+    topDisplay: TextFieldValue,
     bottomDisplay: String,
     backspaceButtonEnabled: Boolean,
+    alertDialogParameters: AlertDialogParameters,
     displayViewModel: DisplayViewModel
 ) {
     val currentOrientation = LocalConfiguration.current.orientation
@@ -39,6 +42,7 @@ fun MainScreen(
             topDisplay = topDisplay,
             bottomDisplay = bottomDisplay,
             backspaceButtonEnabled = backspaceButtonEnabled,
+            alertDialogParameters = alertDialogParameters,
             displayViewModel = displayViewModel
         )
     else
@@ -46,6 +50,7 @@ fun MainScreen(
             topDisplay = topDisplay,
             bottomDisplay = bottomDisplay,
             backspaceButtonEnabled = backspaceButtonEnabled,
+            alertDialogParameters = alertDialogParameters,
             displayViewModel = displayViewModel
         )
 }
@@ -53,9 +58,10 @@ fun MainScreen(
 //@Preview(showBackground = true)
 @Composable
 fun Portrait(
-    topDisplay: String,
+    topDisplay: TextFieldValue,
     bottomDisplay: String,
     backspaceButtonEnabled: Boolean,
+    alertDialogParameters: AlertDialogParameters,
     displayViewModel: DisplayViewModel
 ) {
     val rowModifier = Modifier
@@ -64,6 +70,14 @@ fun Portrait(
     val rowHorizontalArrangement = Arrangement.SpaceBetween
     val focusRequester = FocusRequester()
     AndroidCalculatorTheme {
+        CustomAlertDialog(
+            onDismissRequest = {
+                displayViewModel.showAlertDialog(false, "", "")
+            },
+            showAlertDialog = alertDialogParameters.enabled,
+            title = alertDialogParameters.title,
+            text = alertDialogParameters.text
+        )
         Column(
             modifier = Modifier
                 .fillMaxHeight()
@@ -73,9 +87,7 @@ fun Portrait(
             CompositionLocalProvider(LocalTextInputService provides null) {
                 BasicTextField(
                     value = topDisplay,
-                    onValueChange = {
-
-                    },
+                    onValueChange = { displayViewModel.onTopDisplayChange(it) },
                     modifier = Modifier
                         .focusRequester(focusRequester)
                         .height(150.dp)
@@ -85,13 +97,11 @@ fun Portrait(
                 )
                 DisposableEffect(Unit) {
                     focusRequester.requestFocus()
-                    onDispose {  }
+                    onDispose { }
                 }
                 BasicTextField(
                     value = bottomDisplay,
-                    onValueChange = {
-
-                    },
+                    onValueChange = { },
                     modifier = Modifier
                         .fillMaxWidth(),
                     textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.End),
@@ -228,9 +238,10 @@ fun Portrait(
 //@Preview(widthDp = 851, heightDp = 393, showBackground = true)
 @Composable
 fun Landscape(
-    topDisplay: String,
+    topDisplay: TextFieldValue,
     bottomDisplay: String,
     backspaceButtonEnabled: Boolean,
+    alertDialogParameters: AlertDialogParameters,
     displayViewModel: DisplayViewModel
 ) {
     val textFontSize = 10.sp
@@ -241,6 +252,14 @@ fun Landscape(
     systemUiController.isStatusBarVisible = false
     val focusRequester = FocusRequester()
     AndroidCalculatorTheme {
+        CustomAlertDialog(
+            onDismissRequest = {
+                displayViewModel.showAlertDialog(false, "", "")
+            },
+            showAlertDialog = alertDialogParameters.enabled,
+            title = alertDialogParameters.title,
+            text = alertDialogParameters.text
+        )
         Column(
             modifier = Modifier
                 .fillMaxHeight()
@@ -251,9 +270,7 @@ fun Landscape(
             CompositionLocalProvider(LocalTextInputService provides null) {
                 BasicTextField(
                     value = topDisplay,
-                    onValueChange = {
-
-                    },
+                    onValueChange = { },
                     modifier = Modifier
                         .focusRequester(focusRequester)
                         .fillMaxWidth(),
@@ -262,13 +279,11 @@ fun Landscape(
                 )
                 DisposableEffect(Unit) {
                     focusRequester.requestFocus()
-                    onDispose {  }
+                    onDispose { }
                 }
                 BasicTextField(
                     value = bottomDisplay,
-                    onValueChange = {
-
-                    },
+                    onValueChange = { },
                     modifier = Modifier
                         .fillMaxWidth(),
                     textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.End),
